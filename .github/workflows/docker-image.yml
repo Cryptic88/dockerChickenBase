@@ -84,11 +84,11 @@ jobs:
 
     - name: Integration Step 1 - Seed Data via API
       run: |
-       echo "Posting a new chicken payload to the database..."
-        curl -X POST http://localhost:8080/Chicken \ 
-        -H "Content-Type: application/json" \
-        -d '{"name": "Clucky", "breed": "Rhode Island Red"}'\
-        --fail --verbose
+        echo "Posting a new chicken payload to the API..."
+        curl --fail --verbose \
+          -X POST http://localhost:8080/Chicken \
+          -H "Content-Type: application/json" \
+          -d '{"name": "Clucky", "breed": "Rhode Island Red"}'
 
     - name: Integration Step 2 - Verify Front-End Rendering
       run: |
@@ -117,7 +117,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: integration-testing
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-    environment: Production
     steps:
     - name: Execute Server Infrastructure Sync
       run: |

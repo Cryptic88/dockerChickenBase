@@ -1,0 +1,31 @@
+services:
+  api-service:
+    build:
+      context: .
+      dockerfile: ChickenAPI/Dockerfile
+    container_name: api-service
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+    ports:
+      - "8080:8080"
+
+  mvc-service:
+    build:
+      context: .
+      dockerfile: ChickMVC/Dockerfile
+    container_name: mvc-service
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+    depends_on:
+      - api-service
+    ports:
+      - "80:8080"
+
+  chick-db-service:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: chick-db-service
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: "ChickenBase!123"
+    ports:
+      - "1433:1433"
