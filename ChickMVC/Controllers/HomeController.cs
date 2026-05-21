@@ -6,8 +6,25 @@ namespace ChickMVC.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly HttpClient _httpClient;
+
+        public HomeController(HttpClient httpClient)
         {
+            _httpClient = httpClient;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            try
+            {
+                var response = await _httpClient.GetStringAsync("http://api-service:8080/api/chicken");
+                ViewBag.Chicken = response;
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Chicken = "Error: " + ex.Message;
+            }
+
             return View();
         }
 
