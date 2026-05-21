@@ -9,6 +9,7 @@ namespace ChickenAPI.Controllers
         private static readonly List<object> Chickens = new();
 
         [HttpGet("api/chicken")]
+        [HttpGet("/api/chicken")]
         public IActionResult GetAll()
         {
             return Ok(Chickens);
