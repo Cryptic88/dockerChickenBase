@@ -88,7 +88,7 @@ jobs:
         curl --fail --verbose \
           -X POST http://localhost:8080/Chicken \
           -H "Content-Type: application/json" \
-          -d '{"name": "Clucky", "breed": "Rhode Island Red"}'
+          -d '{"name": "Clucky", "breed": "Rhode Island Red"}' \
 
     - name: Integration Step 2 - Verify Front-End Rendering
       run: |
