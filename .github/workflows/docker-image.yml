@@ -93,7 +93,7 @@ jobs:
     - name: Integration Step 2 - Verify Front-End Rendering
       run: |
        echo "Querying the MVC web application home page on port 80..."
-       MVC_RESPONSE=$(curl -s http://localhost:80)
+       MVC_RESPONSE=$(curl -s http://localhost:80/)
 
        echo "Asserting that the MVC application is rendering the chicken data..."
        if echo "$MVC_RESPONSE" | grep -q "Clucky"; then
